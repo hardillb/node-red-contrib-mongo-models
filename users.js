@@ -4,13 +4,14 @@ const passportLocalMongoose = require('passport-local-mongoose');
 
 const Users = new Schema({
 	appname: { type: String, unique: true, required: true},
-	username: { type: String, required: true},
+	username: { type: String, unique: true, required: true},
 	email: String,
 	permissions: { type: String, default: '*' },
 });
 
 var options = {
-	usernameUnique: true,
+	usernameUnique: false,
+	usernameLowerCase: true,
 	saltlen: 12,
 	keylen: 24,
 	iterations: 901,
