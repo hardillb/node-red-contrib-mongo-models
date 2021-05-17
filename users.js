@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const Users = new Schema({
-	appname: { type: String, unique: true, required: true},
+	appname: { type: String, required: true},
 	username: { type: String, required: true},
 	email: String,
 	permissions: { type: String, default: '*' },
@@ -19,6 +19,7 @@ var options = {
 };
 
 Users.plugin(passportLocalMongoose,options);
+Users.index({appname: 1, username: 1}, {unique: true})
 Users.set('toObject', {getters: true});
 Users.set('toJSON', {getters: true});
 
